@@ -1,0 +1,5 @@
+
+*.ipch
+*.sln
+*.opendb
+*.db
