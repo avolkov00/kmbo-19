@@ -1,29 +1,72 @@
-#ifndef LLIST_H
-#define LLIST_H
+#pragma once
 
-#include <cstddef>
-
-// Linked list of integers
+// потом поменяем на шаблоны
+using ValueType = double;
 
 class LList
 {
-	// HERE WILL BE YOUR CODE
+	// класс узла списка
+	// по своей сути, может содержать любые данные,
+	// можно реализовать и ассоциативный массив, просто добавив 
+	// поле с ключем в узел и, с учетом этого, поменять методы LList 
+	// (доступ по ключу, поиск по ключу и т.д.)
+	struct Node {
+		Node(const ValueType& value, Node* next = nullptr);
+		~Node();
 
-	public:
+		void insert_atNext(const ValueType& value);
+		void erase_atNext();
 
-	LList();                         // construct new collection
-	~LList();                        // free resources
+		ValueType value;
+		Node* next;
+	};
 
-	void push_back(int val);         // add new value at the end:  [1 2 3 4] -> [1 2 3 4 5]
-	void push_front(int val);        // add new value at the begin [1 2 3 4] -> [5 1 2 3 4]
-	void pop_back(int val);          // remove at the end          [1 2 3 4] -> [1 2 3]
-	void pop_front(int val);         // remove at the front        [1 2 3 4] -> [2 3 4]
-	size_t size() const;             // get actual number of items [1 2 3 4] -> 4
-	int& operator[](size_t idx);     // get rw access ot specific item addressing by idx
-	int  operator[](size_t idx) const; //get read-only access
-	void erase_at(size_t idx);       // remove item at specific position: [1 2 3 4], 2 -> [1 2 4]
-	void insert_at(size_t idx, int val); // insert item at specific position: [1 2 3 4], 1, 5 -> [1 5 2 3 4]
-	void reverse();                  // reverse item sequense: [1 2 3 4] -> [4 3 2 1]
+public:
+	////
+	LList();
+	LList(const LList& copyList);
+	LList& operator=(const LList& copyList);
+
+	LList(LList&& moveList) noexcept;
+	LList& operator=(LList&& moveList) noexcept;
+
+	~LList();
+	////
+
+	// доступ к значению элемента по индексу
+	ValueType& operator[](const size_t pos) const;
+	// доступ к узлу по индексу
+	LList::Node* getNode(const size_t pos) const;
+	
+	// вставка элемента по индексу, сначала ищем, куда вставлять (О(n)), потом вставляем (O(1))
+	void insert_at(const size_t pos, const ValueType& value);
+	// вставка элемента после узла, (O(1))
+	static void insert_atAfterNode(Node* node, const ValueType& value);
+	// вставка в конец (О(n))
+	void push_back(const ValueType& value);
+	// вставка в начало (О(1))
+	void push_front(const ValueType& value);
+
+	// удаление
+	void erase_at(const size_t pos);
+	void erase_atNextNode(Node* node);
+	void pop_front();
+	void pop_back();
+	
+	// поиск, О(n)
+	long long int findIndex(const ValueType& value) const;
+	Node* findNode(const ValueType& value) const;
+
+	// разворот списка
+	void reverse();						// изменение текущего списка
+	LList reverse() const;			// полчение нового списка (для константных объектов)
+	LList getReverseList() ;	// чтобы неконстантный объект тоже мог возвращать новый развернутый список
+
+	size_t size() const;
+private:
+	Node*	_head;
+	size_t	_size;
+
+	void forceNodeDelete(Node* node);
 };
 
-#endif //LLIST_H
