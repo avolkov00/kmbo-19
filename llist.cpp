@@ -1,7 +1,7 @@
 #include "llist.h"
-
+#include <cstddef>
 #include <cassert>
-
+#include <iostream>
 LList::Node::Node(const ValueType& value, Node* next)
 {
 	this->value = value;
@@ -291,22 +291,25 @@ void LList::forceNodeDelete(Node* node)
 }
 
 #include <iostream>
-
-
-using namespace std;
-
 void dump(const LList& l)
 {
-	for (size_t i = 0; i < l.size(); ++i, cout << " ") cout << l[i];
+	for (size_t i = 0; i < l.size(); ++i, std::cout << " ") std::cout << l[i];
 }
-LList makedata(){
-	LList a;
-	for (size_t i = 0; i< 200000; ++i);
-	return data;
-}
+//LList makedata(){
+//	LList a;
+//	for (size_t i = 0; i< 20000; ++i) a.push_back(1);
+//	return a;
+//}
 int main()
 {
-	LList l=makedata();
-	cout << l.size();
-	return 0;
+	//move
+
+	LList l;
+	for(int i = 0;i < 3000;i++) l.push_back(i);
+	LList a(move(l));
+
+	//copy
+    //LList m;
+    //for(int i = 0;i < 3000;i++) m.push_back(i);
+    //LList b(m);
 }

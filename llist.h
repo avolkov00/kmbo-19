@@ -2,6 +2,9 @@
 
 // потом поменяем на шаблоны
 using ValueType = double;
+#include <cstddef>
+#include <cassert>
+#include <iostream>
 
 class LList
 {
