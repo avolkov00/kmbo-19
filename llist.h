@@ -1,4 +1,4 @@
-#pragma once
+	#pragma once
 
 // потом поменяем на шаблоны
 using ValueType = double;
