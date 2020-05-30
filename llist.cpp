@@ -95,7 +95,8 @@ LList& LList::operator=(LList&& moveList) noexcept
 #endif
 LList::~LList()
 {
-	forceNodeDelete(_head);
+	while (_size)
+		pop_front();
 }
 
 ValueType& LList::operator[](const size_t pos) const
@@ -279,16 +280,7 @@ size_t LList::size() const
 }
 
 
-void LList::forceNodeDelete(Node* node)
-{
-	if (node == nullptr) {
-		return;
-	}
 
-	Node* nextDeleteNode = node->next;
-	delete node;
-	forceNodeDelete(nextDeleteNode);
-}
 
 #include <iostream>
 void dump(const LList& l)
