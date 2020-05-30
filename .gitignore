@@ -1,0 +1,7 @@
+
+*.db
+*.ipch
+*.ipch
+*.sln
+MilonovLList/.vs/MilonovLList/v16/.suo
+llist.cpp

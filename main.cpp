@@ -1,16 +1,16 @@
 #include <iostream>
-#include <llist.h>
+#include "llist.h"
 
 using namespace std;
 
-void dump(const LList& l)
+void dump(const LList<int>& l)
 {
 	for(size_t i = 0; i < l.size(); ++i, cout << " ") cout << l[i];
 }
 
 int main()
 {
-	LList l;
+	LList<int> l;
 	l.push_back(1);
 	l.push_front(0);
 	l.push_back(2);
