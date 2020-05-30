@@ -282,26 +282,4 @@ size_t LList::size() const
 
 
 
-#include <iostream>
-void dump(const LList& l)
-{
-	for (size_t i = 0; i < l.size(); ++i, std::cout << " ") std::cout << l[i];
-}
-//LList makedata(){
-//	LList a;
-//	for (size_t i = 0; i< 20000; ++i) a.push_back(1);
-//	return a;
-//}
-int main()
-{
-	//move
 
-	LList l;
-	for(int i = 0;i < 3000;i++) l.push_back(i);
-	LList a(move(l));
-
-	//copy
-    //LList m;
-    //for(int i = 0;i < 3000;i++) m.push_back(i);
-    //LList b(m);
-}
